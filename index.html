@@ -531,7 +531,29 @@ function renderCustodial() {
   const lbls = (cl.trend||[]).map(m=>`<span style="font-size:9px;color:var(--muted);flex:1;text-align:center">${m.label}</span>`).join('');
   html += `<div style="display:flex;gap:3px">${lbls}</div></div>`;
 
-  // Notes from walkthroughs (flags by item not yet in data)
+  // Where we can improve — item-level flag frequency
+  if (cl.flags?.length) {
+    html += '<div class="card"><div class="card-label">Where we can improve</div>';
+    cl.flags.forEach(f => {
+      const itemName = f.item.includes(' — ') ? f.item.split(' — ')[1] : f.item;
+      const spaceName = f.item.includes(' — ') ? f.item.split(' — ')[0] : '';
+      const bc = f.trend==='focus' ? 'badge-focus' : f.trend==='improving' ? 'badge-improving' : 'badge-stable';
+      const bl = f.trend==='focus' ? 'Focus area' : f.trend==='improving' ? 'Improving' : 'Stable';
+      html += `<div class="improve-item">
+        <div style="flex:1">
+          <span class="improve-name">${itemName}</span>
+          ${spaceName ? `<span style="font-size:10px;color:var(--muted);display:block;margin-top:2px">${spaceName}</span>` : ''}
+          <span class="${bc}">${bl}</span>
+        </div>
+        <div class="improve-right">
+          <span class="flag-rate-val">${f.curr}%</span>
+          <span class="prior-rate-val">${f.prior}% prior</span>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+  // Walkthrough notes
   if (cl.notes?.length) {
     html += '<div class="card"><div class="card-label">Walkthrough notes</div>';
     cl.notes.forEach(n => {
