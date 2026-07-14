@@ -163,7 +163,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div class="hdr-meta" id="meta"></div>
 </div>
 <div class="hdr hdr-detail" id="hdr-detail" style="display:none">
-  <div style="font-size:13px;color:rgba(255,255,255,.6);font-weight:500;cursor:pointer;margin-bottom:6px" onclick="go('home')">← Back to Benning Ops Dashboard</div>
+  <button onclick="go('home')" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#fff;cursor:pointer;margin-bottom:10px;-webkit-tap-highlight-color:transparent">← Back to Benning Ops Dashboard</button>
   <div class="hdr-cluster" id="hdr-detail-title"></div>
   <div class="hdr-schools">BEC · BMC</div>
 </div>
@@ -383,20 +383,21 @@ function renderDrills() {
     }).join('');
   }
 
-  let html = backBar('Evacuation &amp; Lockdown Drills') + '<div class="detail-body">';
+  let html = backBar('Evacuation & Lockdown Drills') + '<div class="detail-body">';
 
   CAMPUSES.forEach(campus => {
     const comp = (OPS.drills?.compliance||[]).find(d=>d.campus===campus);
     const last = (OPS.drills?.lastDrills||[]).find(d=>d.campus===campus);
 
-    html += `<div class="card"><div class="card-label">${campus}</div>`;
+    html += `<div class="card">
+      <div style="font-size:18px;font-weight:700;color:var(--navy);padding-bottom:12px;margin-bottom:12px;border-bottom:2px solid var(--border)">${campus}</div>`;
     html += `<div class="drill-type-lbl">Evacuation</div>`;
     html += `<div class="month-row">${dots(comp?.evac)}</div>`;
     html += `<div class="drill-type-lbl" style="margin-top:16px">Lockdown</div>`;
     html += `<div class="month-row">${dots(comp?.lock)}</div>`;
     html += '</div>';
 
-    html += '<div class="card"><div class="card-label">Most recent — '+campus+'</div>';
+    html += '<div class="card"><div style="font-size:16px;font-weight:700;color:var(--navy);padding-bottom:10px;margin-bottom:10px;border-bottom:1.5px solid var(--border)">Most recent drills — '+campus+'</div>';
     ['evac','lock'].forEach(type => {
       const drill = last?.[type];
       const label = type==='evac' ? 'Evacuation' : 'Lockdown';
@@ -474,7 +475,7 @@ function ratingTable(curr, prior) {
 function renderArrival() {
   const con = document.getElementById('d-arrival');
   const cl = clusterArr();
-  let html = backBar('Arrival &amp; Dismissal') + '<div class="detail-body">';
+  let html = backBar('Arrival & Dismissal') + '<div class="detail-body">';
   if (!cl) { html += '<div class="no-data">No data available.</div></div>'; con.innerHTML=html; return; }
 
   ['arrival','dismissal'].forEach(session => {
@@ -530,21 +531,13 @@ function renderCustodial() {
   const lbls = (cl.trend||[]).map(m=>`<span style="font-size:9px;color:var(--muted);flex:1;text-align:center">${m.label}</span>`).join('');
   html += `<div style="display:flex;gap:3px">${lbls}</div></div>`;
 
-  // Where we can improve
-  if (cl.flags?.length) {
-    html += '<div class="card"><div class="card-label">Where we can improve</div>';
-    cl.flags.forEach(f => {
-      const bc = f.trend==='focus' ? 'badge-focus' : f.trend==='improving' ? 'badge-improving' : 'badge-stable';
-      const bl = f.trend==='focus' ? 'Focus area' : f.trend==='improving' ? 'Improving' : 'Stable';
-      html += `<div class="improve-item">
-        <div style="flex:1">
-          <span class="improve-name">${f.item}</span>
-          <span class="${bc}">${bl}</span>
-        </div>
-        <div class="improve-right">
-          <span class="flag-rate-val">${f.curr}%</span>
-          <span class="prior-rate-val">${f.prior}% prior</span>
-        </div>
+  // Notes from walkthroughs (flags by item not yet in data)
+  if (cl.notes?.length) {
+    html += '<div class="card"><div class="card-label">Walkthrough notes</div>';
+    cl.notes.forEach(n => {
+      html += `<div style="font-size:12px;color:var(--text);padding:8px 0;border-bottom:0.5px solid var(--border);line-height:1.5">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:3px">${n.campus} · ${n.date} · ${n.role}</div>
+        ${n.note}
       </div>`;
     });
     html += '</div>';
