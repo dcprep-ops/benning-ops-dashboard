@@ -6,8 +6,15 @@
 <title>Benning Ops Dashboard</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Benning">
+<meta name="apple-mobile-web-app-title" content="Benning Ops Dashboard">
+<meta name="application-name" content="Benning Ops Dashboard">
 <meta name="theme-color" content="#1a3a5c">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMGQ5NDg4IiByeD0iNiIvPjxyZWN0IHg9IjQiIHk9IjQiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC45KSIvPjxyZWN0IHg9IjE4IiB5PSI0IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiLz48cmVjdCB4PSI0IiB5PSIxOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIi8+PHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:title" content="Benning Ops Dashboard">
+<meta property="og:description" content="DC Prep Benning cluster — SY 2026-27">
+<meta property="og:image" content="share.png">
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Benning%20Ops%20Dashboard%22%2C%22short_name%22%3A%22Benning%20Ops%20Dashboard%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a3a5c%22%2C%22theme_color%22%3A%22%231a3a5c%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22icon.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
 <style>
 :root {
   --navy:#1a3a5c;--teal:#0d9488;--teal-lt:#e1f5ee;
@@ -93,6 +100,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .spark-low{background:var(--red)}.spark-null{background:var(--border)}
 .pct-big{font-size:28px;font-weight:700}
 
+/* IMPROVE */
+.improve-item{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:12px}
+.improve-item:last-child{border-bottom:none}
+.improve-name{color:var(--navy);flex:1;padding-right:10px;font-weight:500}
+.improve-right{text-align:right;flex-shrink:0}
+.flag-rate-val{font-size:14px;font-weight:700;color:var(--red)}
+.prior-rate-val{font-size:10px;color:var(--muted);display:block}
+.badge-focus{background:var(--red-lt);color:#991b1b;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px}
+.badge-improving{background:var(--teal-lt);color:#0f6e56;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px}
+.badge-stable{background:var(--lt);color:var(--muted);font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px}
+
 /* READINESS */
 .ready-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .ready-stat{background:var(--lt);border-radius:10px;padding:12px 8px;text-align:center}
@@ -109,11 +127,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 </head>
 <body>
 
-<div class="hdr">
+<div class="hdr" id="hdr-main">
   <div class="hdr-brand">DC Prep</div>
-  <div class="hdr-cluster">Benning</div>
+  <div class="hdr-cluster">Benning Ops Dashboard</div>
   <div class="hdr-schools">BEC · BMC</div>
   <div class="hdr-meta" id="meta"></div>
+</div>
+<div class="hdr hdr-detail" id="hdr-detail" style="display:none">
+  <div style="display:flex;align-items:center;gap:10px">
+    <span style="font-size:14px;color:var(--teal);font-weight:500;cursor:pointer" onclick="go('home')">← Back</span>
+    <span class="hdr-cluster" id="hdr-detail-title" style="font-size:17px"></span>
+  </div>
+  <div class="hdr-schools">Benning · BEC · BMC</div>
 </div>
 
 <!-- LANDING -->
@@ -121,15 +146,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div id="home-loading" class="loading-msg">Loading…</div>
   <div class="section-list" id="section-list" style="display:none">
     <div class="section-card" onclick="go('drills')">
-      <div class="section-icon">🚨</div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="section-text">
-        <div class="section-name">Drills</div>
+        <div class="section-name">Evacuation &amp; Lockdown Drills</div>
         <div class="section-sub" id="sub-drills">Evacuation &amp; lockdown compliance</div>
       </div>
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('arrival')">
-      <div class="section-icon">🚗</div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5"/><circle cx="16" cy="17" r="2"/><circle cx="7" cy="17" r="2"/><path d="M5 17H3"/></svg></div>
       <div class="section-text">
         <div class="section-name">Arrival &amp; Dismissal</div>
         <div class="section-sub" id="sub-arrival">Last observation window</div>
@@ -137,15 +162,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('custodial')">
-      <div class="section-icon">🧹</div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l1 1"/><path d="M7 7l-4 13 4-1 2-5"/><path d="M11 11l6 6"/><path d="M17 17l4 4"/><path d="M21 3L11 11"/></svg></div>
       <div class="section-text">
-        <div class="section-name">Custodial</div>
+        <div class="section-name">Custodial Walkthroughs</div>
         <div class="section-sub" id="sub-custodial">Walkthrough completion trend</div>
       </div>
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('readiness')">
-      <div class="section-icon">📚</div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
       <div class="section-text">
         <div class="section-name">Classroom Readiness</div>
         <div class="section-sub" id="sub-readiness">BOY readiness by classroom</div>
@@ -178,6 +203,10 @@ function go(section) {
   const dest = section === 'home' ? 'home' : 'd-'+section;
   const el = document.getElementById(dest);
   if (el) { el.style.display = ''; el.classList.add('active'); }
+  // Toggle headers
+  const isHome = section === 'home';
+  document.getElementById('hdr-main').style.display   = isHome ? '' : 'none';
+  document.getElementById('hdr-detail').style.display = isHome ? 'none' : '';
   window.scrollTo(0,0);
   if (section !== 'home' && OPS) render(section);
 }
@@ -190,7 +219,10 @@ function render(s) {
 }
 
 function backBar(title) {
-  return `<div class="back-bar" onclick="go('home')"><span class="back-txt">← Back</span><span class="back-title">${title}</span></div>`;
+  document.getElementById('hdr-main').style.display = 'none';
+  document.getElementById('hdr-detail').style.display = '';
+  document.getElementById('hdr-detail-title').textContent = title;
+  return '';  // no inline back bar
 }
 
 function e(tag, cls, html) {
@@ -271,7 +303,7 @@ function renderDrills() {
     }).join('');
   }
 
-  let html = backBar('Drills') + '<div class="detail-body">';
+  let html = backBar('Evacuation &amp; Lockdown Drills') + '<div class="detail-body">';
 
   CAMPUSES.forEach(campus => {
     const comp = (OPS.drills?.compliance||[]).find(d=>d.campus===campus);
@@ -395,7 +427,7 @@ function renderCustodial() {
   const con = document.getElementById('d-custodial');
   const cl = clusterCust();
   const cw = cl?.window || WIN;
-  let html = backBar('Custodial') + '<div class="detail-body">';
+  let html = backBar('Custodial Walkthroughs') + '<div class="detail-body">';
   if (!cl) { html += '<div class="no-data">No custodial data available.</div></div>'; con.innerHTML=html; return; }
 
   const pct = cl.currentPct, prev = cl.priorPct;
@@ -417,6 +449,26 @@ function renderCustodial() {
   html += `<div class="sparkline">${sparks}</div>`;
   const lbls = (cl.trend||[]).map(m=>`<span style="font-size:9px;color:var(--muted);flex:1;text-align:center">${m.label}</span>`).join('');
   html += `<div style="display:flex;gap:3px">${lbls}</div></div>`;
+
+  // Where we can improve
+  if (cl.flags?.length) {
+    html += '<div class="card"><div class="card-label">Where we can improve</div>';
+    cl.flags.forEach(f => {
+      const bc = f.trend==='focus' ? 'badge-focus' : f.trend==='improving' ? 'badge-improving' : 'badge-stable';
+      const bl = f.trend==='focus' ? 'Focus area' : f.trend==='improving' ? 'Improving' : 'Stable';
+      html += `<div class="improve-item">
+        <div style="flex:1">
+          <span class="improve-name">${f.item}</span>
+          <span class="${bc}">${bl}</span>
+        </div>
+        <div class="improve-right">
+          <span class="flag-rate-val">${f.curr}%</span>
+          <span class="prior-rate-val">${f.prior}% prior</span>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  }
 
   if (cl.notes?.length) {
     html += '<div class="card"><div class="card-label">Recent notes</div>';
@@ -442,32 +494,61 @@ function renderReadiness() {
   subs.forEach(s => {
     if (!byRoom[s.classroom] || new Date(s.timestamp) > new Date(byRoom[s.classroom].timestamp)) byRoom[s.classroom] = s;
   });
-  const rooms = Object.values(byRoom).sort((a,b)=>a.classroom.localeCompare(b.classroom));
+
+  // Sort: not-started/flagged first, fully ready at bottom
+  const sortOrder = {'Not ready — return visit needed':0,'Ready — minor items remain':1,'Fully ready':2,''  :3};
+  const rooms = Object.values(byRoom).sort((a,b) => {
+    const ad = sortOrder[a.assessment]??3, bd = sortOrder[b.assessment]??3;
+    return ad!==bd ? ad-bd : a.classroom.localeCompare(b.classroom);
+  });
 
   const fully  = rooms.filter(r=>r.assessment==='Fully ready').length;
   const minor  = rooms.filter(r=>r.assessment==='Ready — minor items remain').length;
   const notRdy = rooms.filter(r=>r.assessment==='Not ready — return visit needed').length;
+  const total  = rooms.length;
 
-  html += '<div class="card"><div class="card-label">Summary — '+rooms.length+' classroom'+(rooms.length>1?'s':'')+' assessed</div>';
+  // Summary chips
+  html += '<div class="card"><div class="card-label">Summary — '+total+' classroom'+(total>1?'s':'')+' assessed</div>';
   html += '<div class="ready-grid">';
   html += `<div class="ready-stat"><div class="ready-val" style="color:var(--teal)">${fully}</div><div class="ready-lbl">Fully ready</div></div>`;
-  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--amber)">${minor}</div><div class="ready-lbl">Minor items</div></div>`;
-  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--red)">${notRdy}</div><div class="ready-lbl">Return visit</div></div>`;
+  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--amber)">${minor}</div><div class="ready-lbl">Minor items remain</div></div>`;
+  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--red)">${notRdy}</div><div class="ready-lbl">Return visit needed</div></div>`;
   html += '</div></div>';
 
-  // Group by campus code
+  // Full room list — grouped by campus, not-ready first within each
   CAMPUSES.forEach(campus => {
     const campusRooms = rooms.filter(r => r.campus_code===campus || r.school===CAMPUS_NAMES[campus]);
     if (!campusRooms.length) return;
-    html += `<div class="card"><div class="card-label">${campus}</div>`;
-    campusRooms.forEach(r => {
+    html += `<div class="card">`;
+    html += `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+      <div class="card-label" style="margin:0">${campus}</div>
+      <div style="font-size:11px;color:var(--muted)">${campusRooms.length} room${campusRooms.length>1?'s':''}</div>
+    </div>`;
+
+    // Not-ready section
+    const flagged = campusRooms.filter(r=>r.assessment==='Not ready — return visit needed');
+    const minorRooms = campusRooms.filter(r=>r.assessment==='Ready — minor items remain');
+    const readyRooms = campusRooms.filter(r=>r.assessment==='Fully ready');
+
+    function roomRow(r, muted) {
       const a = r.assessment||'';
       let bc='',bt='';
       if (a==='Fully ready')                        {bc='rb-ready';bt='Fully ready';}
       else if (a==='Ready — minor items remain')     {bc='rb-minor';bt='Minor items';}
       else if (a==='Not ready — return visit needed'){bc='rb-flag'; bt='Return visit';}
-      html += `<div class="room-row"><span class="room-name">${r.classroom}</span><span class="rb ${bc}">${bt||'—'}</span></div>`;
-    });
+      return `<div class="room-row" style="${muted?'opacity:0.65':''}">
+        <span class="room-name">${r.classroom}</span>
+        ${r.grade_band?`<span style="font-size:10px;color:var(--muted);margin-right:8px">${r.grade_band}</span>`:''}
+        <span class="rb ${bc}">${bt||'—'}</span>
+      </div>`;
+    }
+
+    flagged.forEach(r => { html += roomRow(r, false); });
+    minorRooms.forEach(r => { html += roomRow(r, false); });
+    if (readyRooms.length && (flagged.length || minorRooms.length)) {
+      html += `<div style="font-size:9px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);padding:10px 0 4px">Fully ready</div>`;
+    }
+    readyRooms.forEach(r => { html += roomRow(r, true); });
     html += '</div>';
   });
 
