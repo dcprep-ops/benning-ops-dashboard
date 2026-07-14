@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Benning Ops Dashboard">
 <meta name="application-name" content="Benning Ops Dashboard">
 <meta name="theme-color" content="#1a3a5c">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMGQ5NDg4IiByeD0iNiIvPjxyZWN0IHg9IjQiIHk9IjQiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC45KSIvPjxyZWN0IHg9IjE4IiB5PSI0IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOSkiLz48cmVjdCB4PSI0IiB5PSIxOCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiByeD0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjkpIi8+PHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
 <link rel="apple-touch-icon" href="icon.png">
 <meta property="og:title" content="Benning Ops Dashboard">
@@ -37,6 +38,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .section-list{padding:20px 16px}
 .section-card{display:flex;align-items:center;gap:14px;background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .section-card:active{border-color:var(--teal)}
+.cell-icon-box{width:40px;height:40px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cell-icon-box.teal{background:var(--teal)}
+.cell-icon-box i{color:#fff;font-size:20px}
 .section-icon{font-size:22px;flex-shrink:0;width:36px;text-align:center}
 .section-text{flex:1}
 .section-name{font-size:15px;font-weight:600;color:var(--navy)}
@@ -100,6 +104,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .spark-low{background:var(--red)}.spark-null{background:var(--border)}
 .pct-big{font-size:28px;font-weight:700}
 
+/* TABS */
+.camp-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:16px}
+.camp-tab{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;-webkit-tap-highlight-color:transparent}
+.camp-tab.active{color:var(--navy);border-bottom-color:var(--teal);font-weight:700}
 /* IMPROVE */
 .improve-item{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:12px}
 .improve-item:last-child{border-bottom:none}
@@ -165,7 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div id="home-loading" class="loading-msg">Loading…</div>
   <div class="section-list" id="section-list" style="display:none">
     <div class="section-card" onclick="go('drills')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div class="cell-icon-box"><i class="ti ti-alert-triangle"></i></div>
       <div class="section-text">
         <div class="section-name">Evacuation &amp; Lockdown Drills</div>
         <div class="section-sub" id="sub-drills">Evacuation &amp; lockdown compliance</div>
@@ -173,7 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('arrival')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5"/><circle cx="16" cy="17" r="2"/><circle cx="7" cy="17" r="2"/><path d="M5 17H3"/></svg></div>
+      <div class="cell-icon-box teal"><i class="ti ti-car"></i></div>
       <div class="section-text">
         <div class="section-name">Arrival &amp; Dismissal</div>
         <div class="section-sub" id="sub-arrival">Last observation window</div>
@@ -181,7 +189,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('custodial')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5c1-1 2.5-1 3.5 0l2.5 2.5c1 1 1 2.5 0 3.5l-8.5 8.5-6.5 1 1-6.5z"/><line x1="16" y1="5" x2="19" y2="8"/><line x1="3" y1="21" x2="7" y2="17"/></svg></div>
+      <div class="cell-icon-box"><i class="ti ti-spray"></i></div>
       <div class="section-text">
         <div class="section-name">Custodial Walkthroughs</div>
         <div class="section-sub" id="sub-custodial">Walkthrough completion trend</div>
@@ -189,7 +197,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('readiness')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="cell-icon-box teal"><i class="ti ti-chalkboard"></i></div>
       <div class="section-text">
         <div class="section-name">Classroom Readiness</div>
         <div class="section-sub" id="sub-readiness">BOY readiness by classroom</div>
@@ -207,6 +215,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 <div id="d-readiness" class="detail"></div>
 
 <script>
+
+const CLASSROOMS = {
+  AEC: [
+    {name:'American',grade:'EC'},{name:'Gallaudet',grade:'EC'},{name:'George Mason',grade:'EC'},
+    {name:'Johns Hopkins',grade:'EC'},{name:'Syracuse',grade:'EC'},{name:'Williams',grade:'EC'},
+    {name:'Northwestern',grade:'K'},{name:'UChicago',grade:'K'},{name:'UMichigan',grade:'K'},
+    {name:'Gonzaga',grade:'1'},{name:'UOregon',grade:'1'},{name:'Pepperdine',grade:'1'},
+    {name:'Morehouse',grade:'2'},{name:'Spelman',grade:'2'},{name:'Xavier',grade:'2'},
+    {name:'Cornell',grade:'3'},{name:'Dartmouth',grade:'3'},{name:'UPenn',grade:'3'},
+  ],
+  AMC: [
+    {name:'GWU',grade:'4'},{name:'Georgetown',grade:'4'},{name:'Howard',grade:'4'},
+    {name:'UMD',grade:'5'},{name:'UNC',grade:'5'},{name:'UVA',grade:'5'},
+    {name:'FAMU',grade:'6'},{name:'Hampton',grade:'6'},{name:'Tuskegee',grade:'6'},
+    {name:'Princeton',grade:'7'},{name:'Stanford',grade:'7'},
+    {name:'Harvard',grade:'8'},{name:'Yale',grade:'8'},
+  ],
+  BEC: [
+    {name:'American',grade:'EC'},{name:'Gallaudet',grade:'EC'},{name:'George Mason',grade:'EC'},
+    {name:'Johns Hopkins',grade:'EC'},{name:'Syracuse',grade:'EC'},{name:'Williams',grade:'EC'},
+    {name:'Northwestern',grade:'K'},{name:'UChicago',grade:'K'},{name:'UMichigan',grade:'K'},
+    {name:'Gonzaga',grade:'1'},{name:'UOregon',grade:'1'},{name:'Pepperdine',grade:'1'},
+    {name:'Morehouse',grade:'2'},{name:'Spelman',grade:'2'},{name:'Xavier',grade:'2'},
+    {name:'Cornell',grade:'3'},{name:'Dartmouth',grade:'3'},{name:'UPenn',grade:'3'},
+  ],
+  BMC: [
+    {name:'GWU',grade:'4'},{name:'Georgetown',grade:'4'},{name:'Howard',grade:'4'},
+    {name:'UMD',grade:'5'},{name:'UNC',grade:'5'},{name:'UVA',grade:'5'},
+    {name:'FAMU',grade:'6'},{name:'Hampton',grade:'6'},{name:'Tuskegee',grade:'6'},
+    {name:'Princeton',grade:'7'},{name:'Stanford',grade:'7'},
+    {name:'Harvard',grade:'8'},{name:'Yale',grade:'8'},
+  ],
+  EEC: [
+    {name:'American',grade:'EC'},{name:'Gallaudet',grade:'EC'},{name:'George Mason',grade:'EC'},
+    {name:'Johns Hopkins',grade:'EC'},{name:'Syracuse',grade:'EC'},
+    {name:'Northwestern',grade:'K'},{name:'UChicago',grade:'K'},{name:'UMichigan',grade:'K'},
+    {name:'Gonzaga',grade:'1'},{name:'UOregon',grade:'1'},{name:'Pepperdine',grade:'1'},
+    {name:'Morehouse',grade:'2'},{name:'Spelman',grade:'2'},{name:'Xavier',grade:'2'},
+    {name:'Cornell',grade:'3'},{name:'Dartmouth',grade:'3'},{name:'UPenn',grade:'3'},
+  ],
+  EMC: [
+    {name:'GWU',grade:'4'},{name:'Georgetown',grade:'4'},{name:'Howard',grade:'4'},
+    {name:'UMD',grade:'5'},{name:'UNC',grade:'5'},{name:'UVA',grade:'5'},
+    {name:'FAMU',grade:'6'},{name:'Hampton',grade:'6'},{name:'Tuskegee',grade:'6'},
+    {name:'Princeton',grade:'7'},{name:'Stanford',grade:'7'},
+    {name:'Harvard',grade:'8'},{name:'Yale',grade:'8'},
+  ],
+};
+
+function gradeLabel(g) {
+  return g==='EC'?'EC':g==='K'?'Kindergarten':g+(g==='1'?'st':g==='2'?'nd':g==='3'?'rd':'th')+' Grade';
+}
+
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwPbhFWpzKX6S6seb1c0QKplVM22LjZG6bkGMBnTNopry6dDr5YGtffKKR3EsFQ77n5BQ/exec';
 const CLUSTER  = 'Benning';   // e.g. 'Anacostia'
 const CAMPUSES = ["BEC", "BMC"];   // e.g. ['AEC','AMC']
@@ -505,11 +566,10 @@ function renderReadiness() {
   const subs = (READINESS?.submissions||[]).filter(s =>
     CAMPUSES.includes(s.campus_code) || CAMPUSES.some(c => CAMPUS_NAMES[c]===s.school)
   );
+
   let html = backBar('Classroom Readiness') + '<div class="detail-body">';
 
-  if (!subs.length) { html += '<div class="no-data">No assessments logged yet.</div></div>'; con.innerHTML=html; return; }
-
-  // Build latest map: campusCode|classroom → most recent submission
+  // Build latest map
   const latest = {};
   subs.forEach(s => {
     const key = (s.campus_code||'') + '|' + s.classroom;
@@ -523,76 +583,90 @@ function renderReadiness() {
   }
 
   const groups = [
-    { key:'needs',  label:'Not Ready — Return Visit Needed', cls:'needs',  filter: key => { const s=latest[key]; return s && s.assessment==='Not ready — return visit needed'; }},
-    { key:'unseen', label:'Not Yet Assessed',                cls:'unseen', filter: key => !latest[key] },
-    { key:'minor',  label:'Ready — Minor Items',             cls:'minor',  filter: key => { const s=latest[key]; return s && s.assessment==='Ready — minor items remain'; }},
-    { key:'full',   label:'Fully Ready',                     cls:'full',   filter: key => { const s=latest[key]; return s && s.assessment==='Fully ready'; }},
+    { key:'needs',  label:'Not Ready — Return Visit Needed', cls:'needs',
+      filter: (camp,room) => { const s=latest[camp+'|'+room]; return s && s.assessment==='Not ready — return visit needed'; }},
+    { key:'unseen', label:'Not Yet Assessed', cls:'unseen',
+      filter: (camp,room) => !latest[camp+'|'+room] },
+    { key:'minor',  label:'Ready — Minor Items', cls:'minor',
+      filter: (camp,room) => { const s=latest[camp+'|'+room]; return s && s.assessment==='Ready — minor items remain'; }},
+    { key:'full',   label:'Fully Ready', cls:'full',
+      filter: (camp,room) => { const s=latest[camp+'|'+room]; return s && s.assessment==='Fully ready'; }},
   ];
 
-  // Per campus
-  CAMPUSES.forEach(campus => {
-    const campusSubs = subs.filter(s => s.campus_code===campus || s.school===CAMPUS_NAMES[campus]);
-    // All known classrooms from submissions + any unseen would need a roster
-    // Since we don't have a roster here, show all classrooms that appear in submissions
-    const allRooms = [...new Set(campusSubs.map(s=>s.classroom))].sort();
-    if (!allRooms.length) return;
+  function campusPanel(campus) {
+    const rooms = CLASSROOMS[campus] || [];
+    if (!rooms.length) return '';
 
-    const needAttn = allRooms.filter(r => {
-      const key = campus+'|'+r;
-      const s = latest[key];
+    const needAttn = rooms.filter(r => {
+      const s = latest[campus+'|'+r.name];
       return !s || s.assessment==='Not ready — return visit needed';
     }).length;
-    const complete = allRooms.filter(r => {
-      const key = campus+'|'+r;
-      const s = latest[key];
+    const complete = rooms.filter(r => {
+      const s = latest[campus+'|'+r.name];
       return s && (s.assessment==='Fully ready'||s.assessment==='Ready — minor items remain');
     }).length;
 
-    html += `<div class="card">`;
-    html += `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
-      <div style="font-size:16px;font-weight:700;color:var(--navy)">${CAMPUS_NAMES[campus]||campus}</div>
-      <div style="display:flex;gap:16px">
-        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--red)">${needAttn}</div><div style="font-size:10px;color:var(--muted)">Need attention</div></div>
-        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--teal)">${complete}</div><div style="font-size:10px;color:var(--muted)">Complete</div></div>
-      </div>
+    let p = `<div style="display:flex;justify-content:space-between;margin-bottom:16px">
+      <div style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--red)">${needAttn}</div><div style="font-size:10px;color:var(--muted)">Need attention</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--teal)">${complete}</div><div style="font-size:10px;color:var(--muted)">Complete</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--navy)">${rooms.length}</div><div style="font-size:10px;color:var(--muted)">Total rooms</div></div>
     </div>`;
 
     groups.forEach(g => {
-      const groupRooms = allRooms.filter(r => g.filter(campus+'|'+r));
+      const groupRooms = rooms.filter(r => g.filter(campus, r.name));
       if (!groupRooms.length) return;
-      html += `<div class="cr-section">`;
-      html += `<div class="cr-section-hdr ${g.cls}">${g.label} &nbsp;(${groupRooms.length})</div>`;
-      groupRooms.forEach(room => {
-        const sub = latest[campus+'|'+room];
+      p += `<div class="cr-section">`;
+      p += `<div class="cr-section-hdr ${g.cls}">${g.label} &nbsp;(${groupRooms.length})</div>`;
+      groupRooms.forEach(r => {
+        const sub = latest[campus+'|'+r.name];
         const dateStr = sub ? formatDate(sub.timestamp) : null;
-        const dotCls  = g.key==='full'?'dot-full':g.key==='minor'?'dot-minor':g.key==='needs'?'dot-needs':'dot-unseen';
+        const dotCls   = g.key==='full'?'dot-full':g.key==='minor'?'dot-minor':g.key==='needs'?'dot-needs':'dot-unseen';
         const asmntCls = g.key==='full'?'asmnt-full':g.key==='minor'?'asmnt-minor':g.key==='needs'?'asmnt-needs':'';
-        const asmntTxt = g.key==='unseen' ? 'Not assessed'
-          : g.key==='full'  ? 'Fully ready'
-          : g.key==='minor' ? 'Minor items'
-          : 'Not ready';
-        html += `<div class="cr-row">
+        const asmntTxt = g.key==='unseen'?'Not assessed':g.key==='full'?'Fully ready':g.key==='minor'?'Minor items':'Not ready';
+        p += `<div class="cr-row">
           <div class="cr-left">
             <div class="cr-dot ${dotCls}"></div>
             <div>
               <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                <span class="cr-name">${room}</span>
-                ${sub?.grade_band?`<span class="cr-grade">(${sub.grade_band})</span>`:''}
-                ${asmntTxt?`<span class="cr-assessment ${asmntCls}">${asmntTxt}</span>`:''}
+                <span class="cr-name">${r.name}</span>
+                <span class="cr-grade">(${gradeLabel(r.grade)})</span>
+                ${asmntCls?`<span class="cr-assessment ${asmntCls}">${asmntTxt}</span>`:''}
               </div>
               ${dateStr?`<div class="cr-date">Last assessment: ${dateStr}</div>`:''}
             </div>
           </div>
         </div>`;
       });
-      html += '</div>';
+      p += '</div>';
     });
-    html += '</div>';
+    return p;
+  }
+
+  // Tabs for the two campuses in the cluster
+  html += `<div class="camp-tabs">
+    <div class="camp-tab active" id="tab-${CAMPUSES[0]}" onclick="switchCampusTab('${CAMPUSES[0]}')">${CAMPUSES[0]}</div>
+    <div class="camp-tab" id="tab-${CAMPUSES[1]}" onclick="switchCampusTab('${CAMPUSES[1]}')">${CAMPUSES[1]}</div>
+  </div>`;
+
+  CAMPUSES.forEach((campus, i) => {
+    html += `<div class="card" id="panel-${campus}" style="${i>0?'display:none':''}">
+      ${campusPanel(campus)}
+    </div>`;
   });
 
   html += '</div>';
   con.innerHTML = html;
 }
+
+function switchCampusTab(campus) {
+  CAMPUSES.forEach(c => {
+    const tab = document.getElementById('tab-'+c);
+    const panel = document.getElementById('panel-'+c);
+    if (tab) tab.classList.toggle('active', c===campus);
+    if (panel) panel.style.display = c===campus ? '' : 'none';
+  });
+}
+
 
 // ── BOOT ─────────────────────────────────────────────────────────────────
 go('home');
