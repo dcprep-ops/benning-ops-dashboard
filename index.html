@@ -111,7 +111,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .badge-improving{background:var(--teal-lt);color:#0f6e56;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px}
 .badge-stable{background:var(--lt);color:var(--muted);font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-left:6px}
 
-/* READINESS */
+/* READINESS — matching BOY Readiness Dashboard */
+.cr-section { margin-bottom: 20px; }
+.cr-section-hdr { font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 0 6px;border-bottom:1px solid var(--border);margin-bottom:2px; }
+.cr-section-hdr.needs  { color:var(--red); }
+.cr-section-hdr.minor  { color:var(--amber); }
+.cr-section-hdr.full   { color:var(--teal); }
+.cr-section-hdr.unseen { color:var(--muted); }
+.cr-row { display:flex;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border); }
+.cr-row:last-child { border-bottom:none; }
+.cr-left { display:flex;align-items:flex-start;gap:10px;flex:1; }
+.cr-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px; }
+.dot-full   { background:var(--teal); }
+.dot-minor  { background:var(--amber); }
+.dot-needs  { background:var(--red); }
+.dot-unseen { background:var(--border); }
+.cr-name { font-size:14px;font-weight:500;color:var(--navy); }
+.cr-grade { font-size:12px;color:var(--muted);margin-left:2px; }
+.cr-date { font-size:11px;color:var(--muted);margin-top:3px; }
+.cr-assessment { font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:4px; }
+.asmnt-full  { background:#f0fdf4;color:#166534; }
+.asmnt-minor { background:#fef9c3;color:#854d0e; }
+.asmnt-needs { background:#fef2f2;color:#991b1b; }
 .ready-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .ready-stat{background:var(--lt);border-radius:10px;padding:12px 8px;text-align:center}
 .ready-val{font-size:22px;font-weight:700}
@@ -134,11 +155,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div class="hdr-meta" id="meta"></div>
 </div>
 <div class="hdr hdr-detail" id="hdr-detail" style="display:none">
-  <div style="display:flex;align-items:center;gap:10px">
-    <span style="font-size:14px;color:var(--teal);font-weight:500;cursor:pointer" onclick="go('home')">← Back</span>
-    <span class="hdr-cluster" id="hdr-detail-title" style="font-size:17px"></span>
-  </div>
-  <div class="hdr-schools">Benning · BEC · BMC</div>
+  <div style="font-size:13px;color:rgba(255,255,255,.6);font-weight:500;cursor:pointer;margin-bottom:6px" onclick="go('home')">← Back to Benning Ops Dashboard</div>
+  <div class="hdr-cluster" id="hdr-detail-title"></div>
+  <div class="hdr-schools">BEC · BMC</div>
 </div>
 
 <!-- LANDING -->
@@ -162,7 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('custodial')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l1 1"/><path d="M7 7l-4 13 4-1 2-5"/><path d="M11 11l6 6"/><path d="M17 17l4 4"/><path d="M21 3L11 11"/></svg></div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5c1-1 2.5-1 3.5 0l2.5 2.5c1 1 1 2.5 0 3.5l-8.5 8.5-6.5 1 1-6.5z"/><line x1="16" y1="5" x2="19" y2="8"/><line x1="3" y1="21" x2="7" y2="17"/></svg></div>
       <div class="section-text">
         <div class="section-name">Custodial Walkthroughs</div>
         <div class="section-sub" id="sub-custodial">Walkthrough completion trend</div>
@@ -170,7 +189,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
       <div class="section-arrow">›</div>
     </div>
     <div class="section-card" onclick="go('readiness')">
-      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+      <div class="section-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
       <div class="section-text">
         <div class="section-name">Classroom Readiness</div>
         <div class="section-sub" id="sub-readiness">BOY readiness by classroom</div>
@@ -487,68 +506,87 @@ function renderReadiness() {
     CAMPUSES.includes(s.campus_code) || CAMPUSES.some(c => CAMPUS_NAMES[c]===s.school)
   );
   let html = backBar('Classroom Readiness') + '<div class="detail-body">';
+
   if (!subs.length) { html += '<div class="no-data">No assessments logged yet.</div></div>'; con.innerHTML=html; return; }
 
-  // Most recent per classroom
-  const byRoom = {};
+  // Build latest map: campusCode|classroom → most recent submission
+  const latest = {};
   subs.forEach(s => {
-    if (!byRoom[s.classroom] || new Date(s.timestamp) > new Date(byRoom[s.classroom].timestamp)) byRoom[s.classroom] = s;
+    const key = (s.campus_code||'') + '|' + s.classroom;
+    if (!latest[key] || new Date(s.timestamp) > new Date(latest[key].timestamp)) latest[key] = s;
   });
 
-  // Sort: not-started/flagged first, fully ready at bottom
-  const sortOrder = {'Not ready — return visit needed':0,'Ready — minor items remain':1,'Fully ready':2,''  :3};
-  const rooms = Object.values(byRoom).sort((a,b) => {
-    const ad = sortOrder[a.assessment]??3, bd = sortOrder[b.assessment]??3;
-    return ad!==bd ? ad-bd : a.classroom.localeCompare(b.classroom);
-  });
+  function formatDate(ts) {
+    if (!ts) return null;
+    const d = ts instanceof Date ? ts : new Date(ts);
+    return isNaN(d) ? null : d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  }
 
-  const fully  = rooms.filter(r=>r.assessment==='Fully ready').length;
-  const minor  = rooms.filter(r=>r.assessment==='Ready — minor items remain').length;
-  const notRdy = rooms.filter(r=>r.assessment==='Not ready — return visit needed').length;
-  const total  = rooms.length;
+  const groups = [
+    { key:'needs',  label:'Not Ready — Return Visit Needed', cls:'needs',  filter: key => { const s=latest[key]; return s && s.assessment==='Not ready — return visit needed'; }},
+    { key:'unseen', label:'Not Yet Assessed',                cls:'unseen', filter: key => !latest[key] },
+    { key:'minor',  label:'Ready — Minor Items',             cls:'minor',  filter: key => { const s=latest[key]; return s && s.assessment==='Ready — minor items remain'; }},
+    { key:'full',   label:'Fully Ready',                     cls:'full',   filter: key => { const s=latest[key]; return s && s.assessment==='Fully ready'; }},
+  ];
 
-  // Summary chips
-  html += '<div class="card"><div class="card-label">Summary — '+total+' classroom'+(total>1?'s':'')+' assessed</div>';
-  html += '<div class="ready-grid">';
-  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--teal)">${fully}</div><div class="ready-lbl">Fully ready</div></div>`;
-  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--amber)">${minor}</div><div class="ready-lbl">Minor items remain</div></div>`;
-  html += `<div class="ready-stat"><div class="ready-val" style="color:var(--red)">${notRdy}</div><div class="ready-lbl">Return visit needed</div></div>`;
-  html += '</div></div>';
-
-  // Full room list — grouped by campus, not-ready first within each
+  // Per campus
   CAMPUSES.forEach(campus => {
-    const campusRooms = rooms.filter(r => r.campus_code===campus || r.school===CAMPUS_NAMES[campus]);
-    if (!campusRooms.length) return;
+    const campusSubs = subs.filter(s => s.campus_code===campus || s.school===CAMPUS_NAMES[campus]);
+    // All known classrooms from submissions + any unseen would need a roster
+    // Since we don't have a roster here, show all classrooms that appear in submissions
+    const allRooms = [...new Set(campusSubs.map(s=>s.classroom))].sort();
+    if (!allRooms.length) return;
+
+    const needAttn = allRooms.filter(r => {
+      const key = campus+'|'+r;
+      const s = latest[key];
+      return !s || s.assessment==='Not ready — return visit needed';
+    }).length;
+    const complete = allRooms.filter(r => {
+      const key = campus+'|'+r;
+      const s = latest[key];
+      return s && (s.assessment==='Fully ready'||s.assessment==='Ready — minor items remain');
+    }).length;
+
     html += `<div class="card">`;
     html += `<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
-      <div class="card-label" style="margin:0">${campus}</div>
-      <div style="font-size:11px;color:var(--muted)">${campusRooms.length} room${campusRooms.length>1?'s':''}</div>
+      <div style="font-size:16px;font-weight:700;color:var(--navy)">${CAMPUS_NAMES[campus]||campus}</div>
+      <div style="display:flex;gap:16px">
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--red)">${needAttn}</div><div style="font-size:10px;color:var(--muted)">Need attention</div></div>
+        <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--teal)">${complete}</div><div style="font-size:10px;color:var(--muted)">Complete</div></div>
+      </div>
     </div>`;
 
-    // Not-ready section
-    const flagged = campusRooms.filter(r=>r.assessment==='Not ready — return visit needed');
-    const minorRooms = campusRooms.filter(r=>r.assessment==='Ready — minor items remain');
-    const readyRooms = campusRooms.filter(r=>r.assessment==='Fully ready');
-
-    function roomRow(r, muted) {
-      const a = r.assessment||'';
-      let bc='',bt='';
-      if (a==='Fully ready')                        {bc='rb-ready';bt='Fully ready';}
-      else if (a==='Ready — minor items remain')     {bc='rb-minor';bt='Minor items';}
-      else if (a==='Not ready — return visit needed'){bc='rb-flag'; bt='Return visit';}
-      return `<div class="room-row" style="${muted?'opacity:0.65':''}">
-        <span class="room-name">${r.classroom}</span>
-        ${r.grade_band?`<span style="font-size:10px;color:var(--muted);margin-right:8px">${r.grade_band}</span>`:''}
-        <span class="rb ${bc}">${bt||'—'}</span>
-      </div>`;
-    }
-
-    flagged.forEach(r => { html += roomRow(r, false); });
-    minorRooms.forEach(r => { html += roomRow(r, false); });
-    if (readyRooms.length && (flagged.length || minorRooms.length)) {
-      html += `<div style="font-size:9px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);padding:10px 0 4px">Fully ready</div>`;
-    }
-    readyRooms.forEach(r => { html += roomRow(r, true); });
+    groups.forEach(g => {
+      const groupRooms = allRooms.filter(r => g.filter(campus+'|'+r));
+      if (!groupRooms.length) return;
+      html += `<div class="cr-section">`;
+      html += `<div class="cr-section-hdr ${g.cls}">${g.label} &nbsp;(${groupRooms.length})</div>`;
+      groupRooms.forEach(room => {
+        const sub = latest[campus+'|'+room];
+        const dateStr = sub ? formatDate(sub.timestamp) : null;
+        const dotCls  = g.key==='full'?'dot-full':g.key==='minor'?'dot-minor':g.key==='needs'?'dot-needs':'dot-unseen';
+        const asmntCls = g.key==='full'?'asmnt-full':g.key==='minor'?'asmnt-minor':g.key==='needs'?'asmnt-needs':'';
+        const asmntTxt = g.key==='unseen' ? 'Not assessed'
+          : g.key==='full'  ? 'Fully ready'
+          : g.key==='minor' ? 'Minor items'
+          : 'Not ready';
+        html += `<div class="cr-row">
+          <div class="cr-left">
+            <div class="cr-dot ${dotCls}"></div>
+            <div>
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <span class="cr-name">${room}</span>
+                ${sub?.grade_band?`<span class="cr-grade">(${sub.grade_band})</span>`:''}
+                ${asmntTxt?`<span class="cr-assessment ${asmntCls}">${asmntTxt}</span>`:''}
+              </div>
+              ${dateStr?`<div class="cr-date">Last assessment: ${dateStr}</div>`:''}
+            </div>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    });
     html += '</div>';
   });
 
