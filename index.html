@@ -48,6 +48,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 /* DETAIL */
 .detail{display:none}
+#d-readiness{background:#fff}
+#d-readiness .detail-body{padding:12px 12px 60px}
+@media(min-width:768px){
+  #d-readiness .detail-body{padding:24px 24px 60px}
+}
 .detail.active{display:block}
 .back-bar{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border-bottom:0.5px solid var(--border);cursor:pointer;-webkit-tap-highlight-color:transparent;position:sticky;top:0;z-index:50}
 .back-txt{font-size:14px;color:var(--teal);font-weight:500}
@@ -136,16 +141,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .rdot-blank {background:#fff;border:1.5px solid #cbd5e1}
 .rdot-na    {background:var(--lt);color:var(--muted);font-size:8px;font-weight:600}
 
-.section-block{margin-bottom:24px}
-.section-hdr{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:0 0 8px}
-.space-table{width:100%;border-collapse:collapse;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden}
-.space-table th{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:8px 12px;background:var(--lt);border-bottom:0.5px solid var(--border);text-align:left}
-.space-table th.sc{text-align:center;width:62px;padding:8px 4px}
+.section-block{margin-bottom:10px}
+.section-hdr{font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:#0C447C;background:#E6F1FB;padding:8px 12px;margin:28px -12px 10px}
+.section-block:first-child .section-hdr{margin-top:0}
+@media(min-width:768px){
+  .section-hdr{margin:28px -24px 10px;padding:8px 24px}
+}
+.space-table{width:100%;border-collapse:collapse}
+.space-table th{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:6px 12px;border-bottom:0.5px solid var(--border);text-align:left}
+.space-table th.sc{text-align:center;width:56px;padding:6px 4px}
 .space-table td{padding:7px 12px;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text);vertical-align:middle}
 .space-table tr:last-child td{border-bottom:none}
 .space-table tr:hover td{background:#f8fbff}
 .space-table td.sc{text-align:center;vertical-align:middle;padding:7px 4px}
 .space-name{font-weight:500}
+.space-room-num{font-weight:400;font-size:13px;color:#B8C0CC}
 
 .net-summary{padding:0 0 16px}
 .net-summary-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
@@ -555,7 +565,7 @@ function renderCustodial() {
 }
 
 // ── READINESS — ported from the main BOY Readiness Dashboard ───────────────
-const SECTION_ORDER = ['Classrooms','Outdoor','Common Spaces','Offices & Conference Rooms','Other'];
+const SECTION_ORDER = ['Classrooms','Shared Student Spaces','Restrooms','Common Spaces','Offices','Staff Common Spaces','Technology'];
 
 function dotClass(assessment) {
   if (!assessment) return 'rdot-blank';
@@ -623,7 +633,7 @@ function buildSectionedTables(rooms) {
         <tbody>`;
     groups[sec].forEach(r => {
       html += `<tr>
-        <td><span class="space-name">${r.space}</span></td>
+        <td><span class="space-name">${r.space}</span>${r.roomNumber ? ` <span class="space-room-num">(${r.roomNumber})</span>` : ''}</td>
         <td class="sc">${makeDot(r.MDS  ? r.MDS.assessment  : null)}</td>
         <td class="sc">${makeDot(r.SDO  ? r.SDO.assessment  : null)}</td>
         <td class="sc">${makeDot(r.tech ? r.tech.assessment : null)}</td>
