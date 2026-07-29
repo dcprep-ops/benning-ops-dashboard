@@ -51,7 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 #d-readiness{background:#fff}
 #d-readiness .detail-body{padding:12px 12px 60px}
 @media(min-width:768px){
-  #d-readiness .detail-body{padding:24px 24px 60px}
+  #d-readiness .detail-body{padding:24px 24px 60px;max-width:900px;margin:0 auto}
 }
 .detail.active{display:block}
 .back-bar{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--card);border-bottom:0.5px solid var(--border);cursor:pointer;-webkit-tap-highlight-color:transparent;position:sticky;top:0;z-index:50}
@@ -588,10 +588,10 @@ function dotClass(assessment) {
 
 function dotLabel(cls) {
   if (cls === 'rdot-ok')    return '✓';
-  if (cls === 'rdot-minor') return '~';
+  if (cls === 'rdot-minor') return '';
   if (cls === 'rdot-bad')   return '!';
   if (cls === 'rdot-na')    return '—';
-  if (cls === 'rdot-pending') return '⏳';
+  if (cls === 'rdot-pending') return '';
   return '';
 }
 
@@ -606,8 +606,8 @@ const READINESS_INLINE_LEGEND = `
   <div style="display:flex;align-items:center;gap:14px;padding:0 0 16px;flex-wrap:wrap">
     <span style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase">Status</span>
     <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-ok" style="width:18px;height:18px;font-size:9px">✓</span> Fully ready</span>
-    <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-pending" style="width:18px;height:18px;font-size:9px">⏳</span> Pending SDO signoff</span>
-    <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-minor" style="width:18px;height:18px;font-size:9px">~</span> Minor items</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-pending" style="width:18px;height:18px;font-size:9px"></span> Pending SDO signoff</span>
+    <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-minor" style="width:18px;height:18px;font-size:9px"></span> Minor items</span>
     <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-bad" style="width:18px;height:18px;font-size:9px">!</span> Not ready</span>
     <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-blank" style="width:18px;height:18px"></span> Not assessed</span>
     <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)"><span class="rdot rdot-na" style="width:18px;height:18px;font-size:8px">—</span> N/A</span>
@@ -683,13 +683,8 @@ function buildCampusProgress(rooms) {
   const pendingSeg = pendingPct > 0 ? `<div class="seg-pending" style="width:${pendingPct}%"><span class="seg-label-pending">${pendingPct >= 8 ? pendingPct+'%' : ''}</span></div>` : '';
   return `<div class="net-summary">
     <div class="net-summary-title">Signoff Progress</div>
-    <div class="bar-legend">
-      <span class="bar-legend-item"><span class="bar-legend-swatch" style="background:var(--green)"></span>Fully ready</span>
-      <span class="bar-legend-item"><span class="bar-legend-swatch" style="background:#378ADD"></span>Pending SDO signoff</span>
-      <span class="bar-legend-item"><span class="bar-legend-swatch" style="background:var(--yellow)"></span>Minor items remain</span>
-    </div>
     <div class="kpi-pct">${combined}<span class="kpi-pct-unit">%</span></div>
-    <div class="kpi-bar-track">${okSeg}${pendingSeg}${minorSeg}</div>
+    <div class="kpi-bar-track" style="margin-bottom:24px">${okSeg}${pendingSeg}${minorSeg}</div>
   </div>`;
 }
 
